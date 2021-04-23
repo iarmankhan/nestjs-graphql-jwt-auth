@@ -6,13 +6,16 @@ export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    length: 75,
+  })
   firstName: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 75 })
   lastName: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column({ nullable: true })
