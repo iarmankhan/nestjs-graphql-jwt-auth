@@ -6,9 +6,11 @@ import { JwtStrategy } from 'src/auth/jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthRepository } from 'src/auth/auth.repository';
 import { AuthResolver } from 'src/auth/auth.resolver';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([AuthRepository]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: 'topSecret111',
@@ -18,6 +20,6 @@ import { AuthResolver } from 'src/auth/auth.resolver';
     }),
     UsersModule,
   ],
-  providers: [AuthService, AuthRepository, JwtStrategy, AuthResolver],
+  providers: [AuthService, JwtStrategy, AuthResolver],
 })
 export class AuthModule {}

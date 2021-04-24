@@ -25,14 +25,14 @@ export class AuthRepository extends Repository<UserEntity> {
     return email;
   }
 
-  async validateUserPassword(credentials: AuthCredentialsInput) {
+  async validateUserPassword(
+    credentials: AuthCredentialsInput,
+  ): Promise<string> {
     const { email, password } = credentials;
     const user = await this.findOne({ email });
 
     if (user && (await user.validatePassword(password))) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { password, salt, ...newUser } = user;
-      return newUser;
+      return user.email;
     }
 
     return null;
