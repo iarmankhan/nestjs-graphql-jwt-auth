@@ -16,4 +16,8 @@ export class AuthService {
   async login(credentials: AuthCredentialsInput) {
     return this.authRepository.validateUserPassword(credentials);
   }
+
+  async register(credentials: AuthCredentialsInput): Promise<string> {
+    return this.authRepository.register(credentials);
+  }
 }

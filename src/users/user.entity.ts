@@ -1,20 +1,21 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { Timestamp } from 'src/entities/timestamp.entity';
 
 import * as bcrypt from 'bcrypt';
 
 @Entity('users')
-export class UserEntity {
+export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({
     type: 'varchar',
     length: 75,
+    nullable: true,
   })
   firstName: string;
 
-  @Column({ type: 'varchar', length: 75 })
+  @Column({ type: 'varchar', length: 75, nullable: true })
   lastName: string;
 
   @Column({ unique: true })
