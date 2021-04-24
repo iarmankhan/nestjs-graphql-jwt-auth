@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { AuthRepository } from 'src/auth/auth.repository';
 import { AuthCredentialsInput } from 'src/auth/auth-credentials.input';
 import { JwtService } from '@nestjs/jwt';
+import { JwtPayload } from 'src/auth/jwt-payload.interface';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,7 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const payload = { user };
+    const payload: JwtPayload = { email: user };
     return this.jwtService.sign(payload);
   }
 
